@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//SessionCreationPolicy.IF_REQUIRED => 필요시 생성(기본)
 		//SessionCreationPolicy.NEVER => 세션 생선하지않지만, 기존에 존재하면 사용
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 스프링시큐리티가 생성하지도않고 기존것을 사용하지도않음(JWT토큰사용)
-		http.authorizeRequests().antMatchers("/api/login/**").permitAll();
+		http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
